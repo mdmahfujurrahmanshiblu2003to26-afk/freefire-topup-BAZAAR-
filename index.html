@@ -375,4 +375,86 @@ window.addEventListener("scroll",()=>{
 });
 </script>
 </body>
-</html>
+</html>from pathlib import Path
+
+html = '''<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ফ্রী ফায়ার টপ আপ বাজার | FF TOPUP BAZAR</title>
+<style>
+:root{--bg:#070707;--card:#121212;--red:#ff3030;--gold:#ffc400;--text:#fff;--muted:#bbb;--line:#292929}
+*{box-sizing:border-box;scroll-behavior:smooth}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:linear-gradient(135deg,#050505,#180606,#050505);color:var(--text)}
+a{text-decoration:none;color:inherit}header{position:sticky;top:0;z-index:20;background:#080808ee;border-bottom:1px solid #421414}.nav{max-width:1150px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:900;font-size:20px;color:var(--gold)}.brand small{display:block;font-size:11px;color:#ddd;margin-top:3px}nav{display:flex;gap:6px;flex-wrap:wrap}nav a{padding:8px 11px;border-radius:9px;font-size:14px}nav a:hover{background:#281010;color:var(--gold)}
+.hero{max-width:1150px;margin:auto;padding:55px 18px 35px;text-align:center}.logo{display:inline-block;border:2px solid var(--gold);padding:12px 20px;border-radius:18px;background:#160707;box-shadow:0 0 30px #ff303033}.logo b{font-size:30px;color:var(--gold)}
+h1{font-size:clamp(28px,6vw,52px);margin:20px 0 10px}.hero p{color:var(--muted);max-width:700px;margin:0 auto 22px;line-height:1.7}.btn{display:inline-block;background:linear-gradient(135deg,var(--red),#a90000);padding:13px 20px;border-radius:12px;font-weight:800;border:0;color:#fff;cursor:pointer}
+.container{max-width:1150px;margin:auto;padding:18px}.section{margin:25px 0 45px}.section h2{font-size:28px;margin-bottom:7px}.sub{color:var(--muted)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}input,select{width:100%;padding:13px;border:1px solid var(--line);border-radius:11px;background:#0c0c0c;color:#fff;outline:none}.search{flex:1;min-width:210px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}.card{background:linear-gradient(145deg,#151515,#0d0d0d);border:1px solid var(--line);border-radius:16px;padding:17px;transition:.2s}.card:hover{transform:translateY(-3px);border-color:#742020}.card .icon{font-size:28px}.card h3{margin:9px 0 5px;font-size:18px}.price{font-size:22px;color:var(--gold);font-weight:900;margin:8px 0 13px}.card button{width:100%;border:0;cursor:pointer;color:#fff;background:#b50000;padding:11px;border-radius:10px;font-weight:800}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{background:#101010;border:1px solid var(--line);border-radius:17px;padding:20px}.paynum{font-size:27px;color:var(--gold);font-weight:900}.steps{line-height:1.9;color:#ddd}.notice{border-left:4px solid var(--gold);background:#1a1505;padding:14px 16px;border-radius:10px}
+form{display:grid;gap:13px}.form-group{display:grid;gap:6px}label{font-size:14px;color:#ddd}footer{border-top:1px solid var(--line);padding:28px 18px;text-align:center;color:#aaa}.float{position:fixed;right:17px;bottom:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#18b957;color:#fff;font-size:26px;z-index:30;box-shadow:0 8px 25px #000}.top{position:fixed;right:17px;bottom:82px;width:43px;height:43px;border-radius:50%;border:1px solid #444;background:#161616;color:#fff;z-index:30;cursor:pointer}
+@media(max-width:700px){.nav{align-items:flex-start;flex-direction:column}.pay{grid-template-columns:1fr}.hero{padding-top:38px}.logo b{font-size:24px}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+<div class="brand">🔥 FF TOPUP BAZAR<small>ফ্রী ফায়ার টপ আপ বাজার</small></div>
+<nav><a href="#home">হোম</a><a href="#diamonds">ডায়মন্ড</a><a href="#membership">মেম্বারশিপ</a><a href="#payment">পেমেন্ট</a><a href="#order">অর্ডার</a></nav>
+</div></header>
+
+<main id="home">
+<section class="hero"><div class="logo"><b>🔥 FF TOPUP BAZAR</b></div>
+<h1>ফ্রী ফায়ার টপ আপ বাজার</h1>
+<p>দ্রুত ও সহজে Free Fire Diamond এবং Membership Top Up অর্ডার করুন। পেমেন্ট করে Transaction ID দিয়ে অর্ডার পাঠান।</p>
+<a class="btn" href="#diamonds">💎 টপ আপ শুরু করুন</a></section>
+
+<div class="container">
+<section class="section" id="diamonds"><h2>💎 Diamond Top Up</h2><p class="sub">আপনার পছন্দের প্যাকেজ বেছে নিয়ে অর্ডার করুন।</p>
+<div class="toolbar"><input class="search" id="search" placeholder="🔎 Diamond / Package খুঁজুন..."><select id="sort"><option value="default">ডিফল্ট</option><option value="low">কম দাম থেকে</option><option value="high">বেশি দাম থেকে</option></select></div>
+<div class="grid" id="diamondGrid"></div></section>
+
+<section class="section" id="membership"><h2>🎁 Membership & Special</h2><p class="sub">Weekly, Monthly ও Special Pass.</p><div class="grid" id="specialGrid"></div></section>
+
+<section class="section" id="payment"><h2>💳 পেমেন্ট</h2><div class="pay">
+<div class="panel"><h3>📱 bKash</h3><p>এই নম্বরে পেমেন্ট করুন:</p><div class="paynum">01712567757</div><p class="steps">১. bKash থেকে Send Money করুন।<br>২. পেমেন্টের পর Transaction ID সংরক্ষণ করুন।<br>৩. নিচের Order Form পূরণ করুন।</p><div class="notice">⚠️ কখনোই Free Fire Password, bKash PIN বা OTP কাউকে দেবেন না।</div></div>
+<div class="panel"><h3>📋 অর্ডার করার নিয়ম</h3><div class="steps"><b>Step 1:</b> Package নির্বাচন করুন।<br><b>Step 2:</b> UID ও নাম দিন।<br><b>Step 3:</b> bKash পেমেন্ট করুন।<br><b>Step 4:</b> Transaction ID দিন।<br><b>Step 5:</b> WhatsApp-এ অর্ডার পাঠান।</div></div>
+</div></section>
+
+<section class="section" id="order"><h2>🛒 অর্ডার ফর্ম</h2><div class="panel"><form id="orderForm">
+<div class="form-group"><label>Free Fire UID *</label><input id="uid" required placeholder="আপনার UID"></div>
+<div class="form-group"><label>Player Name *</label><input id="name" required placeholder="Player Name"></div>
+<div class="form-group"><label>মোবাইল নম্বর *</label><input id="phone" required placeholder="01XXXXXXXXX"></div>
+<div class="form-group"><label>Package *</label><select id="package" required><option value="">Package নির্বাচন করুন</option></select></div>
+<div class="form-group"><label>Payment Method *</label><select id="method" required><option>bKash</option></select></div>
+<div class="form-group"><label>Transaction ID *</label><input id="trx" required placeholder="bKash Transaction ID"></div>
+<button class="btn" type="submit">📲 WhatsApp-এ অর্ডার পাঠান</button></form><p id="result" style="color:#7cff9a"></p></div></section>
+
+<section class="section"><h2>🛡️ নিরাপত্তা</h2><div class="notice">আমরা কখনো আপনার Free Fire Password, bKash PIN বা OTP চাইব না। অর্ডার করার আগে UID ও Transaction ID সঠিকভাবে যাচাই করুন।</div></section>
+</div></main>
+
+<footer><b>🔥 FF TOPUP BAZAR</b><br>ফ্রী ফায়ার টপ আপ বাজার<br><br>📱 WhatsApp: 01983287983<br>© <span id="year"></span> FF TOPUP BAZAR. All Rights Reserved.</footer>
+<a class="float" href="https://wa.me/8801983287983" target="_blank">💬</a><button class="top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const packages=[
+["25 Diamond",25,"diamond"],["50 Diamond",40,"diamond"],["75 Diamond",55,"diamond"],["100 Diamond",70,"diamond"],["115 Diamond",80,"diamond"],["240 Diamond",160,"diamond"],["310 Diamond",220,"diamond"],["355 Diamond",240,"diamond"],["480 Diamond",320,"diamond"],["505 Diamond",340,"diamond"],["520 Diamond",370,"diamond"],["610 Diamond",405,"diamond"],["725 Diamond",485,"diamond"],["850 Diamond",550,"diamond"],["965 Diamond",625,"diamond"],["1060 Diamond",730,"diamond"],["1090 Diamond",720,"diamond"],["1240 Diamond",810,"diamond"],["1850 Diamond",1150,"diamond"],["2090 Diamond",1289,"diamond"],["2530 Diamond",1620,"diamond"],["4010 Diamond",2439,"diamond"],["5060 Diamond",3240,"diamond"],["7590 Diamond",4820,"diamond"],["10120 Diamond",6425,"diamond"],["12650 Diamond",8025,"diamond"],["15180 Diamond",9660,"diamond"],
+["Weekly Lite",49,"special"],["4X Weekly Lite",170,"special"],["Weekly Membership",175,"special"],["Monthly Membership",800,"special"],["Level Up Pass",175,"special"],["Evo 3 Days",75,"special"],["Evo 7 Days",115,"special"],["Evo 30 Days",305,"special"],["Full Level Up Pass",550,"special"]];
+
+const dg=document.getElementById("diamondGrid"),sg=document.getElementById("specialGrid"),sel=document.getElementById("package"),search=document.getElementById("search"),sort=document.getElementById("sort");
+function card(p){return `<div class="card"><div class="icon">${p[2]=="diamond"?"💎":"🎁"}</div><h3>${p[0]}</h3><div class="price">৳${p[1]}</div><button onclick="choosePackage('${p[0]}')">অর্ডার করুন</button></div>`}
+function render(){let q=search.value.toLowerCase().trim(),a=packages.filter(p=>p[0].toLowerCase().includes(q));if(sort.value=="low")a.sort((x,y)=>x[1]-y[1]);if(sort.value=="high")a.sort((x,y)=>y[1]-x[1]);dg.innerHTML=a.filter(p=>p[2]=="diamond").map(card).join("");sg.innerHTML=a.filter(p=>p[2]=="special").map(card).join("")}
+function choosePackage(n){sel.value=n;document.getElementById("order").scrollIntoView({behavior:"smooth"})}
+packages.forEach(p=>{let o=document.createElement("option");o.value=p[0];o.textContent=`${p[0]} — ৳${p[1]}`;sel.appendChild(o)});
+search.addEventListener("input",render);sort.addEventListener("change",render);
+document.getElementById("orderForm").addEventListener("submit",e=>{e.preventDefault();let uid=document.getElementById("uid").value.trim(),name=document.getElementById("name").value.trim(),phone=document.getElementById("phone").value.trim(),pack=sel.value,trx=document.getElementById("trx").value.trim(),p=packages.find(x=>x[0]==pack),id="FFTB-"+Date.now().toString().slice(-8);document.getElementById("result").textContent="Order ID: "+id;let msg=`🔥 FF TOPUP BAZAR ORDER%0A%0AOrder ID: ${id}%0AUID: ${encodeURIComponent(uid)}%0APlayer Name: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0APackage: ${encodeURIComponent(pack)}%0APrice: ৳${p?p[1]:""}%0APayment: bKash%0ATransaction ID: ${encodeURIComponent(trx)}%0AbKash Number: 01712567757`;window.open("https://wa.me/8801983287983?text="+msg,"_blank")});
+document.getElementById("year").textContent=new Date().getFullYear();render();
+</script>
+</body>
+</html>'''
+
+path=Path("/mnt/data/index.html")
+path.write_text(html,encoding="utf-8")
+print("ফাইল তৈরি হয়েছে:", path)
+
